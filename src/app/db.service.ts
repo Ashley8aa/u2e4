@@ -1,3 +1,4 @@
+/*
 import { Injectable } from '@angular/core';
 import { FirebaseApp } from "firebase/app";
 import { provideFirebaseApp, getApp, initializeApp } from '@angular/fire/app';
@@ -23,3 +24,4 @@ export class DbService {
   }
   
 }
+*/

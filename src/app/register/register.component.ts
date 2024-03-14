@@ -1,19 +1,20 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
-import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
-import { Router } from 'express';
 
 @Component({
   selector: 'app-register',
-  standalone: true,
-  imports: [ReactiveFormsModule ],
   templateUrl: './register.component.html',
-  styleUrl: './register.component.css'
+  standalone: true,
+  imports: [ReactiveFormsModule],
 })
 export class RegisterComponent {
- /* fb = inject(FormBuilder);
-  authService = inject(AuthService)
+  fb = inject(FormBuilder);
+  http = inject(HttpClient);
   router = inject(Router);
+  authService = inject(AuthService);
 
   form = this.fb.nonNullable.group({
     username: ['', Validators.required],
@@ -21,15 +22,17 @@ export class RegisterComponent {
     password: ['', Validators.required],
   });
 
-  
+
+
   onSubmit(): void {
-    const rawForm = this.form.getRawValue()
-    this.authService.register(rawForm.email, rawForm.username, rawForm.password).subscribe(() => {})
-    this.router.navigateByUrl('/landing')
+    console.log('register');
+    const rawForm = this.form.getRawValue();
+    this.authService
+    .register(rawForm.email, rawForm.username, rawForm.password)
+    .subscribe(() => {
+      this.router.navigateByUrl('landing')
+    });
+
   }
-*/
-  
-  
+
 }
-
-
