@@ -4,6 +4,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { StoreComponent } from './store/store.component';
+import { ProductFormComponent } from './product-form/product-form.component';
 
 
 export const routes: Routes = [
@@ -13,6 +14,8 @@ export const routes: Routes = [
     { path: 'register', component: RegisterComponent },
     { path: 'store', component: StoreComponent },
     { path: 'landing', component: LandingComponent },
+    { path: 'product-form', component: ProductFormComponent },
+
 
 
     
