@@ -1,46 +1,43 @@
-import { Component } from '@angular/core';
-import { Auth, signInWithEmailAndPassword } from '@angular/fire/auth'
 import { NavbarComponent } from '../navbar/navbar.component';
-import { Router } from 'express';
+import { HttpClient } from '@angular/common/http';
+import { Component, inject } from '@angular/core';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [NavbarComponent],
+  imports: [NavbarComponent, ReactiveFormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
 //Sign in conf 
 export class LoginComponent {
-  /*
-  constructor(private auth: Auth, private router: Router) { }
+  fb = inject(FormBuilder);
+  http = inject(HttpClient);
+  router = inject(Router);
+  authService = inject(AuthService);
 
- //login method
- login(email: string, password: string) {
-  signInWithEmailAndPassword(this.auth, email, password).then(() => {
-    (<any>this.router).navigate(['/store']);
-  }, err => {
-    alert(err.message);
-    (<any>this.router).navigate(['/login']);
-  })
-}
+  form = this.fb.nonNullable.group({
+    email: ['', Validators.required],
+    password: ['', Validators.required],
+  });
+  errorMessage: string | null = null;
 
-  /*
-  email: string = '';
-  password: string = '';
-  errorMessage: string = '';
-
-  constructor() {}
-  async signIn() {
-    try {
-      const auth = getAuth(); // Retrieve the Auth object
-      await signInWithEmailAndPassword(auth, this.email, this.password); // Sign in with email/password
-      // Authentication successful, redirect or perform other actions
-    } catch (error) {
-      console.error('Error signing in:', error);
-    }
+  
+  onSubmit(): void {
+    const rawForm = this.form.getRawValue();
+    this.authService
+    .login(rawForm.email, rawForm.password)
+    .subscribe({
+      next: () => {
+      this.router.navigateByUrl('/store');
+    },
+    error: (err) => {
+      this.errorMessage = err.code;
+    } 
+    });
   }
-
-  */
 }
 
