@@ -1,5 +1,7 @@
 <app-navbar></app-navbar>
 <div style="padding-top: 20px; padding-left: 20px;">
+ 
+
 
     <div>
         <button type="button" routerLink="/product-form" class="btn btn-outline-success" style="margin-bottom: 10px;">Add Product</button>
@@ -8,9 +10,12 @@
     <div>
         <div class="card" style="width: 18rem; margin-top: 10px;">
             <div class="card-body">
-                <h5 class="card-title">Detergente Tide</h5>
-                <h6 class="card-subtitle mb-2 text-muted">$180</h6>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <h5 class="card-title" *ngFor="let item of item$ | async">
+                     {{ item.name }}  </h5>
+                <h6 class="card-subtitle mb-2 text-muted"  *ngFor="let item of item$ | async">
+                   $ {{ item.price }}  </h6>
+                <p class="card-text" *ngFor="let item of item$ | async">
+                    {{ item.description }} </p>
                 <div class="d-flex gap-2">
 					<button type="button" class="btn btn-success">Edit</button>
 					<button type="button" class="btn btn-danger">Delete</button>
@@ -19,5 +24,5 @@
             </div>
         </div>
     </div>
-
 </div>
+
