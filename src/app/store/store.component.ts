@@ -4,27 +4,36 @@ import { Router, RouterModule, RouterOutlet } from '@angular/router';
 import { ProductFormComponent } from '../product-form/product-form.component';
 import { Observable } from 'rxjs';
 import { Firestore, collection, collectionData } from '@angular/fire/firestore';
-import { CommonModule } from '@angular/common';
-
+import { AsyncPipe, CommonModule } from '@angular/common';
+import { ProductsService } from '../productservice/products.service';
+import { Products } from '../products';
+/*
 interface Item {
   name: string,
   price: number,
   description: string,
-
 };
+*/
+
 
 @Component({
   selector: 'app-store',
   standalone: true,
-  imports: [CommonModule, NavbarComponent, RouterOutlet, RouterModule, ProductFormComponent],
+  imports: [AsyncPipe, CommonModule, NavbarComponent, RouterOutlet, RouterModule, ProductFormComponent],
   templateUrl: './store.component.html',
   styleUrl: './store.component.css'
 })
 
 
 export class StoreComponent {
-
   
+private _productsService = inject(ProductsService);
+
+
+products$ = this._productsService.getProducts();
+
+
+  /*
   item$: Observable<Item[]>;
   firestore: Firestore = inject(Firestore);
   
@@ -32,6 +41,8 @@ export class StoreComponent {
     const itemCollection = collection(this.firestore, 'products');
     this.item$ = collectionData(itemCollection) as Observable<Item[]>;
   }
+*/
+
 
   
 }
